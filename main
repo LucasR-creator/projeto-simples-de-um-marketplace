@@ -1,0 +1,487 @@
+anuncios = []
+
+
+# ==========================================
+# FUNÇÃO PARA MOSTRAR UM ANÚNCIO
+# ==========================================
+
+def mostrar_anuncio(anuncio):
+
+    print("\n==============================")
+    print("          ANÚNCIO")
+    print("==============================")
+
+    print("ID:", anuncio["id"])
+    print("Tipo:", anuncio["tipo"])
+    print("Nome:", anuncio["nome"])
+
+    # Mostra as informações extras
+    for chave, valor in anuncio["informacoes"].items():
+        print(chave + ":", valor)
+
+    print("Preço: R$", anuncio["preco"])
+    print("Cidade:", anuncio["cidade"])
+    print("Descrição:", anuncio["descricao"])
+
+
+# ==========================================
+# MENU PRINCIPAL
+# ==========================================
+
+while True:
+
+    print("\n==============================")
+    print("       COMPRA E VENDA")
+    print("==============================")
+
+    print("1 - Comprar")
+    print("2 - Vender")
+    print("3 - Meus anúncios")
+    print("4 - Sair")
+
+    opcao = input("Digite a opção: ")
+
+
+    # ======================================
+    # COMPRAR
+    # ======================================
+
+    if opcao == "1":
+
+        print("\n==============================")
+        print("          COMPRAR")
+        print("==============================")
+
+        print("1 - Casas")
+        print("2 - Carros")
+        print("3 - Motos")
+        print("4 - Vans")
+        print("5 - Barcos")
+        print("6 - Terrenos")
+        print("7 - Sítios")
+        print("8 - Ver todos")
+        print("9 - Voltar")
+
+        categoria = input("Escolha uma categoria: ")
+
+
+        # VER TODOS OS ANÚNCIOS
+
+        if categoria == "8":
+
+            if len(anuncios) == 0:
+
+                print("\nNenhum anúncio cadastrado.")
+
+            else:
+
+                print("\n===== TODOS OS ANÚNCIOS =====")
+
+                for anuncio in anuncios:
+
+                    mostrar_anuncio(anuncio)
+
+
+        # VOLTAR
+
+        elif categoria == "9":
+
+            print("\nVoltando ao menu...")
+
+
+        # FILTRAR POR CATEGORIA
+
+        elif categoria in ["1", "2", "3", "4", "5", "6", "7"]:
+
+            categorias = {
+
+                "1": "Casa",
+                "2": "Carro",
+                "3": "Moto",
+                "4": "Van",
+                "5": "Barco",
+                "6": "Terreno",
+                "7": "Sítio"
+
+            }
+
+            tipo_escolhido = categorias[categoria]
+
+            encontrados = 0
+
+            print("\n===== ANÚNCIOS =====")
+
+            for anuncio in anuncios:
+
+                if anuncio["tipo"] == tipo_escolhido:
+
+                    mostrar_anuncio(anuncio)
+
+                    encontrados += 1
+
+            if encontrados == 0:
+
+                print("Nenhum anúncio encontrado nessa categoria.")
+
+
+        else:
+
+            print("\nCategoria inválida.")
+
+
+    # ======================================
+    # VENDER
+    # ======================================
+
+    elif opcao == "2":
+
+        print("\n==============================")
+        print("         NOVO ANÚNCIO")
+        print("==============================")
+
+        print("1 - Casa")
+        print("2 - Carro")
+        print("3 - Moto")
+        print("4 - Van")
+        print("5 - Barco")
+        print("6 - Terreno")
+        print("7 - Sítio")
+
+        tipo = input("O que você deseja vender? ")
+
+        # Cria o ID do anúncio
+        id_anuncio = len(anuncios) + 1
+
+
+        # ==================================
+        # CASA
+        # ==================================
+
+        if tipo == "1":
+
+            print("\n--- CADASTRO DE CASA ---")
+
+            nome = input("Nome do anúncio: ")
+            area = input("Área em metros quadrados: ")
+            quartos = input("Quantidade de quartos: ")
+            banheiros = input("Quantidade de banheiros: ")
+            garagem = input("Possui garagem? ")
+            preco = input("Preço: R$ ")
+            cidade = input("Cidade: ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Casa",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Área": area + " m²",
+                    "Quartos": quartos,
+                    "Banheiros": banheiros,
+                    "Garagem": garagem
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # CARRO
+        # ==================================
+
+        elif tipo == "2":
+
+            print("\n--- CADASTRO DE CARRO ---")
+
+            nome = input("Nome do anúncio: ")
+            marca = input("Marca: ")
+            modelo = input("Modelo: ")
+            ano = input("Ano: ")
+            quilometragem = input("Quilometragem: ")
+            cor = input("Cor: ")
+            combustivel = input("Combustível: ")
+            preco = input("Preço: R$ ")
+            cidade = input("Cidade: ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Carro",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Marca": marca,
+                    "Modelo": modelo,
+                    "Ano": ano,
+                    "Quilometragem": quilometragem + " km",
+                    "Cor": cor,
+                    "Combustível": combustivel
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # MOTO
+        # ==================================
+
+        elif tipo == "3":
+
+            print("\n--- CADASTRO DE MOTO ---")
+
+            nome = input("Nome do anúncio: ")
+            marca = input("Marca: ")
+            modelo = input("Modelo: ")
+            ano = input("Ano: ")
+            quilometragem = input("Quilometragem: ")
+            cilindrada = input("Cilindrada: ")
+            preco = input("Preço: R$ ")
+            cidade = input("Cidade: ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Moto",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Marca": marca,
+                    "Modelo": modelo,
+                    "Ano": ano,
+                    "Quilometragem": quilometragem + " km",
+                    "Cilindrada": cilindrada
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # VAN
+        # ==================================
+
+        elif tipo == "4":
+
+            print("\n--- CADASTRO DE VAN ---")
+
+            nome = input("Nome do anúncio: ")
+            marca = input("Marca: ")
+            modelo = input("Modelo: ")
+            ano = input("Ano: ")
+            quilometragem = input("Quilometragem: ")
+            capacidade = input("Quantidade de passageiros: ")
+            preco = input("Preço: R$ ")
+            cidade = input("Cidade: ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Van",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Marca": marca,
+                    "Modelo": modelo,
+                    "Ano": ano,
+                    "Quilometragem": quilometragem + " km",
+                    "Passageiros": capacidade
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # BARCO
+        # ==================================
+
+        elif tipo == "5":
+
+            print("\n--- CADASTRO DE BARCO ---")
+
+            nome = input("Nome do anúncio: ")
+            marca = input("Marca: ")
+            modelo = input("Modelo: ")
+            ano = input("Ano: ")
+            comprimento = input("Comprimento em metros: ")
+            motor = input("Motor: ")
+            preco = input("Preço: R$ ")
+            cidade = input("Cidade: ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Barco",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Marca": marca,
+                    "Modelo": modelo,
+                    "Ano": ano,
+                    "Comprimento": comprimento + " m",
+                    "Motor": motor
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # TERRENO
+        # ==================================
+
+        elif tipo == "6":
+
+            print("\n--- CADASTRO DE TERRENO ---")
+
+            nome = input("Nome do anúncio: ")
+            area = input("Área em metros quadrados: ")
+            cidade = input("Cidade: ")
+            bairro = input("Bairro: ")
+            preco = input("Preço: R$ ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Terreno",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Área": area + " m²",
+                    "Bairro": bairro
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        # ==================================
+        # SÍTIO
+        # ==================================
+
+        elif tipo == "7":
+
+            print("\n--- CADASTRO DE SÍTIO ---")
+
+            nome = input("Nome do anúncio: ")
+            area = input("Área do sítio: ")
+            cidade = input("Cidade: ")
+            possui_casa = input("Possui casa? ")
+            possui_agua = input("Possui água? ")
+            possui_energia = input("Possui energia elétrica? ")
+            preco = input("Preço: R$ ")
+            descricao = input("Descrição: ")
+
+            anuncio = {
+
+                "id": id_anuncio,
+                "tipo": "Sítio",
+                "nome": nome,
+
+                "informacoes": {
+
+                    "Área": area,
+                    "Possui casa": possui_casa,
+                    "Possui água": possui_agua,
+                    "Possui energia": possui_energia
+
+                },
+
+                "preco": preco,
+                "cidade": cidade,
+                "descricao": descricao
+            }
+
+
+        else:
+
+            print("\nTipo de anúncio inválido.")
+
+            continue
+
+
+        # ==================================
+        # ADICIONAR ANÚNCIO À LISTA
+        # ==================================
+
+        anuncios.append(anuncio)
+
+        print("\n==============================")
+        print("ANÚNCIO CADASTRADO COM SUCESSO!")
+        print("==============================")
+
+        print("ID do anúncio:", id_anuncio)
+
+
+    # ======================================
+    # MEUS ANÚNCIOS
+    # ======================================
+
+    elif opcao == "3":
+
+        print("\n==============================")
+        print("        MEUS ANÚNCIOS")
+        print("==============================")
+
+        if len(anuncios) == 0:
+
+            print("Você ainda não possui anúncios.")
+
+        else:
+
+            for anuncio in anuncios:
+
+                mostrar_anuncio(anuncio)
+
+
+    # ======================================
+    # SAIR
+    # ======================================
+
+    elif opcao == "4":
+
+        print("\nSaindo do sistema...")
+
+        break
+
+
+    # ======================================
+    # OPÇÃO INVÁLIDA
+    # ======================================
+
+    else:
+
+        print("\nOpção inválida.")
+
